@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PetAmor — Adoção Responsável</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- TOPO -->
+    <header class="topbar">
+        <div class="logo">
+            <div class="mark">PA</div>
+            <div class="title">
+                <strong>PetAmor</strong>
+                <span>Adoção responsável e moderna</span>
+            </div>
+        </div>
+
+        <nav class="menu">
+            <a href="#">Início</a>
+            <a href="#pets">Pets</a>
+            <a href="#favoritos">Favoritos</a>
+            <a href="#sobre">Sobre</a>
+            <button id="toggleTheme" class="btn-theme">Modo</button>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <section class="hero">
+
+            <!-- COLUNA PRINCIPAL -->
+            <div class="hero-text">
+
+                <h1>Encontre seu novo melhor amigo</h1>
+                <p>Explore animais cadastrados no sistema e encontre aquele que combina com você.</p>
+
+                <!-- FILTROS -->
+                <div class="filters">
+                    <input id="q" placeholder="Buscar por nome, raça ou detalhes...">
+
+                    <select id="filtroTipo">
+                        <option value="">Todos</option>
+                        <option value="Cachorro">Cachorro</option>
+                        <option value="Gato">Gato</option>
+                    </select>
+
+                    <select id="filtroIdade">
+                        <option value="">Qualquer idade</option>
+                        <option value="Filhote">Filhote</option>
+                        <option value="Adulto">Adulto</option>
+                    </select>
+
+                    <button class="btn-primary" onclick="filtrar()">Filtrar</button>
+                </div>
+
+                <!-- LISTA -->
+                <h2 id="pets">Pets disponíveis</h2>
+                <div class="grid" id="listaPets"></div>
+
+                <!-- FAVORITOS -->
+                <section id="favoritos" class="favoritos-area">
+                    <h2>Favoritos</h2>
+                    <div class="grid" id="listaFavoritos">
+                        <p class="muted">Nenhum pet favorito ainda.</p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- SIDEBAR -->
+            <aside class="info-box">
+                <h3>Sistema</h3>
+                <p>Acompanhamento rápido dos pets cadastrados.</p>
+
+                <div class="stats">
+                    <div class="stat">
+                        <strong id="totalPets">0</strong>
+                        <span>Disponíveis</span>
+                    </div>
+                    <div class="stat">
+                        <strong>8</strong>
+                        <span>Adotados</span>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <button class="btn-primary" onclick="openModal('modalAdocao')">Solicitar adoção</button>
+                    <button class="btn-sec" onclick="openModal('modalCadastro')">Cadastrar pet</button>
+                    <button class="btn-sec" onclick="openModal('modalContato')">Contato</button>
+
+                </div>
+            </aside>
+
+        </section>
+
+        <!-- SOBRE -->
+        <section id="sobre" class="sobre">
+            <h3>Sobre o projeto</h3>
+            <p>Interface moderna criada para demonstrar filtros, favoritos, dark mode, animações e modais funcionais.</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <small>© 2025 PetAmor — Plataforma de Adoção</small>
+    </footer>
+
+
+
+    <!-- ========================== -->
+    <!-- MODAL GERAL (3 tipos)     -->
+    <!-- ========================== -->
+
+        <!-- MODAL 1 — ADOÇÃO -->
+        <div id="modalAdocao" class="modal" onclick="if(event.target===this) closeModal('modalAdocao')">
+            <div class="modal-box">
+                <h3>Solicitar Adoção</h3>
+                <form id="formAdocao">
+                    <input name="nome" placeholder="Seu nome" required>
+                    <input name="email" type="email" placeholder="Seu e-mail" required>
+                    <textarea name="mensagem" placeholder="Mensagem" required></textarea>
+
+                    <div class="actions">
+                        <button type="button" class="btn-sec" onclick="closeModal('modalAdocao')">Cancelar</button>
+                        <button type="submit" class="btn-primary">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- MODAL 2 — CADASTRAR PET -->
+        <div id="modalCadastro" class="modal" onclick="if(event.target===this) closeModal('modalCadastro')">
+            <div class="modal-box">
+                <h3>Cadastrar Pet</h3>
+                <form id="formCadastro">
+                    <input name="nome" placeholder="Nome do pet" required>
+                    <input name="especie" placeholder="Espécie (ex: Cachorro)" required>
+                    <input name="raca" placeholder="Raça" required>
+                    <input name="idade" placeholder="Idade (Filhote/Adulto)" required>
+                    <input name="imagem" placeholder="URL da imagem" required>
+                    <textarea name="descricao" placeholder="Descrição"></textarea>
+
+                    <div class="actions">
+                        <button type="button" class="btn-sec" onclick="closeModal('modalCadastro')">Cancelar</button>
+                        <button type="submit" class="btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- MODAL 3 — CONTATO -->
+        <div id="modalContato" class="modal" onclick="if(event.target===this) closeModal('modalContato')">
+            <div class="modal-box">
+                <h3>Contato</h3>
+                <form id="formContato">
+                    <input name="nome" placeholder="Seu nome" required>
+                    <input name="email" type="email" placeholder="Seu e-mail" required>
+                    <textarea name="mensagem" placeholder="Mensagem" required></textarea>
+
+                    <div class="actions">
+                        <button type="button" class="btn-sec" onclick="closeModal('modalContato')">Cancelar</button>
+                        <button type="submit" class="btn-primary">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
